@@ -1,0 +1,372 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Express API",
+    "version": "1.0.0",
+    "description": "A simple Express API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "department": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "branchId": {
+            "type": "integer"
+          }
+        }
+      },
+      "Branch": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/branches": {
+      "get": {
+        "description": "Get all branches",
+        "tags": [
+          "Branch API"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all branches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Branch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new branch",
+        "tags": [
+          "Branch API"
+        ],
+        "responses": {
+          "201": {
+            "description": "Branch created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/branches/{id}": {
+      "get": {
+        "description": "Get a branch by ID",
+        "tags": [
+          "Branch API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the branch to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Branch"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update a branch by ID",
+        "tags": [
+          "Branch API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the branch to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a branch by ID",
+        "tags": [
+          "Branch API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the branch to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/employees": {
+      "get": {
+        "description": "Get all employees",
+        "tags": [
+          "Employee API"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all employees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Add a new employee",
+        "tags": [
+          "Employee API"
+        ],
+        "responses": {
+          "201": {
+            "description": "Employee created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/employees/{id}": {
+      "put": {
+        "description": "Update an employee by ID",
+        "tags": [
+          "Employee API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the employee to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an employee by ID",
+        "tags": [
+          "Employee API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the employee to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee deleted successfully"
+          }
+        }
+      },
+      "get": {
+        "description": "Get an employee by ID",
+        "tags": [
+          "Employee API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the employee to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/branches/{branchId}/employees": {
+      "get": {
+        "description": "Get all employees for a specific branch",
+        "tags": [
+          "Employee API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "branchId",
+            "required": true,
+            "description": "The branch ID to filter employees by",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of employees from the specified branch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/employees/departments/{department}/employees": {
+      "get": {
+        "description": "Get all employees for a specific department",
+        "tags": [
+          "Employee API"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "department",
+            "required": true,
+            "description": "The department name to filter employees by",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of employees from the specified department",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "Get health status of the server",
+        "tags": [
+          "Health API"
+        ],
+        "responses": {
+          "200": {
+            "description": "Server is healthy"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Branch API",
+      "description": "This API contains endpoints for managing branches."
+    },
+    {
+      "name": "Employee API",
+      "description": "This API contains endpoints for managing employees."
+    },
+    {
+      "name": "Health API",
+      "description": "This API contains the health check endpoint for the server."
+    }
+  ]
+}

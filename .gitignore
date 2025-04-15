@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.vscode/
+employee-branch-management-api-firebase-adminsdk-fbsvc-7b6c6866b9.json
+.env
